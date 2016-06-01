@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Android Animations</string>
+    <string name="single_view_animations">Single view animations</string>
+    <string name="layout_animation_controller">Layout animation controller</string>
+    <string name="grid_layout_animation_controller">Grid layout animation controller</string>
+    <string name="duration_brackets">Duration (%s ms):</string>
+    <string name="start_offset_brackets">Start offset (%s):</string>
+    <string name="from_alpha_brackets">From alpha (%s):</string>
+    <string name="to_alpha_brackets">To alpha (%s)</string>
+    <string name="configure_alpha_animation">Configure alpha animation</string>
+    <string name="confirm">Confirm</string>
+    <string name="from_degree_brackets">From degree (%s):</string>
+    <string name="to_degree_brackets">To degree (%s):</string>
+    <string name="pivot_x_brackets">Pivot X (%s):</string>
+    <string name="pivot_y_brackets">Pivot Y (%s):</string>
+    <string name="configure_rotate_animation">Configure rotate animation</string>
+</resources>
