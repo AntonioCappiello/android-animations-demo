@@ -85,8 +85,14 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
     private Map<AnimationType, CheckBox> checkBoxAnimationsList;
     private int mFromDegree;
     private int mToDegree;
-    private int mPivotX;
-    private int mPivotY;
+    private int mRotatePivotX;
+    private int mRotatePivotY;
+    private int mFromScaleX;
+    private int mToScaleX;
+    private int mFromScaleY;
+    private int mToScaleY;
+    private int mScalePivotX;
+    private int mScalePivotY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,8 +208,15 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
 
         mFromDegree = Config.FROM_DEGREE;
         mToDegree = Config.MAX_DEGREE;
-        mPivotX = Config.DEFAULT_PIVOT_X;
-        mPivotY = Config.DEFAULT_PIVOT_Y;
+        mRotatePivotX = Config.DEFAULT_PIVOT_X;
+        mRotatePivotY = Config.DEFAULT_PIVOT_Y;
+
+        mFromScaleX = Config.DEFAULT_FROM_SCALE_X;
+        mToScaleX = Config.DEFAULT_TO_SCALE_X;
+        mFromScaleY = Config.DEFAULT_FROM_SCALE_Y;
+        mToScaleY = Config.DEFAULT_TO_SCALE_Y;
+        mScalePivotX = Config.DEFAULT_SCALE_PIVOT_X;
+        mScalePivotY = Config.DEFAULT_SCALE_PIVOT_Y;
     }
 
     @OnClick(R.id.button_play)
@@ -252,8 +265,8 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
                 this,
                 mFromDegree,
                 mToDegree,
-                mPivotX,
-                mPivotY,
+                mRotatePivotX,
+                mRotatePivotY,
                 tvToAnimate)
                 .show();
     }
@@ -274,9 +287,23 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
             case ALPHA:
                 return new AlphaAnimation(mFromAlpha, mToAlpha);
             case ROTATE:
-                return new RotateAnimation(mFromDegree, mToDegree, mPivotX, mPivotY);
+                return new RotateAnimation(mFromDegree, mToDegree, mRotatePivotX, mRotatePivotY);
             case SCALE:
-                return new ScaleAnimation(Config.FROM_X, Config.TO_X, Config.FROM_Y, Config.TO_Y);
+                if (mScalePivotX == Config.DEFAULT_SCALE_PIVOT_X) {
+                    mScalePivotX = tvToAnimate.getWidth() / 2;
+                }
+                if (mScalePivotY == Config.DEFAULT_SCALE_PIVOT_Y) {
+                    mScalePivotY = tvToAnimate.getHeight() / 2;
+                }
+                return new ScaleAnimation(
+                        mFromScaleX,
+                        mToScaleX,
+                        mFromScaleY,
+                        mToScaleY,
+                        Animation.ABSOLUTE,
+                        mScalePivotX,
+                        Animation.ABSOLUTE,
+                        mScalePivotY);
             case TRANSLATE:
                 return new TranslateAnimation(
                         Animation.RELATIVE_TO_SELF,
@@ -295,7 +322,7 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
     public void setRotateConfig(int fromDegree, int toDegree, int pivotX, int pivotY) {
         mFromDegree = fromDegree;
         mToDegree = toDegree;
-        mPivotX = pivotX;
-        mPivotY = pivotY;
+        mRotatePivotX = pivotX;
+        mRotatePivotY = pivotY;
     }
 }
