@@ -54,11 +54,11 @@ public class DialogBuilderHelper {
 
     public static AlertDialog createRotateAnimationDialog(final Activity activity,
                                                           final OnRotateChangedListener onRotateChangedListener,
-                                                          int fromDegree,
-                                                          int toDegree,
-                                                          int pivotX,
-                                                          int pivotY,
-                                                          TextView tvToAnimate) {
+                                                          final int fromDegree,
+                                                          final int toDegree,
+                                                          final int pivotX,
+                                                          final int pivotY,
+                                                          final TextView tvToAnimate) {
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_rotate_animation, null);
@@ -78,10 +78,15 @@ public class DialogBuilderHelper {
         tvPivotX.setText(activity.getString(R.string.pivot_x_brackets, pivotX));
         tvPivotY.setText(activity.getString(R.string.pivot_y_brackets, pivotY));
 
+        sbFromDegree.setMax(Config.MAX_DEGREE);
         sbFromDegree.setProgress(fromDegree);
+
+        sbToDegree.setMax(Config.MAX_DEGREE);
         sbToDegree.setProgress(toDegree);
+
         sbPivotX.setMax(tvToAnimate.getWidth());
         sbPivotX.setProgress(pivotX);
+
         sbPivotY.setMax(tvToAnimate.getHeight());
         sbPivotY.setProgress(pivotY);
 

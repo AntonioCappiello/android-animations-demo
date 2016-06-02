@@ -19,7 +19,6 @@
         android:id="@+id/sb_from_degree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="10"
         android:progress="0"
         android:layout_marginTop="@dimen/row_margin"/>
 
@@ -33,8 +32,6 @@
         android:id="@+id/sb_to_degree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="10"
-        android:progress="10"
         android:layout_marginTop="@dimen/row_margin"/>
 
     <TextView
@@ -47,8 +44,6 @@
         android:id="@+id/sb_pivot_x"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="10"
-        android:progress="10"
         android:layout_marginTop="@dimen/row_margin"/>
 
     <TextView
@@ -61,7 +56,5 @@
         android:id="@+id/sb_pivot_y"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="10"
-        android:progress="10"
         android:layout_marginTop="@dimen/row_margin"/>
 </LinearLayout>

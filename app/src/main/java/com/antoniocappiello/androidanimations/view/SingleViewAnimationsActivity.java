@@ -201,7 +201,7 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
         mToAlpha = Config.DEFAULT_TO_ALPHA;
 
         mFromDegree = Config.FROM_DEGREE;
-        mToDegree = Config.TO_DEGREE;
+        mToDegree = Config.MAX_DEGREE;
         mPivotX = Config.DEFAULT_PIVOT_X;
         mPivotY = Config.DEFAULT_PIVOT_Y;
     }
