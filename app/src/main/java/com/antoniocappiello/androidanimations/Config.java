@@ -2,8 +2,9 @@ package com.antoniocappiello.androidanimations;
 
 public class Config {
 
-    public static int DEFAULT_SCALE_PIVOT_X = -1;
-    public static int DEFAULT_SCALE_PIVOT_Y = -1;
+    public static final int MAX_SCALE = 10;
+    public static final int DEFAULT_SCALE_PIVOT_X = -1;
+    public static final int DEFAULT_SCALE_PIVOT_Y = -1;
 
     private Config(){}
 
@@ -11,10 +12,10 @@ public class Config {
     public static final int DEFAULT_PIVOT_X = 0;
     public static final int DEFAULT_PIVOT_Y = 0;
     public static final int MAX_DEGREE = 360;
-    public static int DEFAULT_FROM_SCALE_X = 0;
-    public static int DEFAULT_FROM_SCALE_Y = 0;
-    public static int DEFAULT_TO_SCALE_X = 1;
-    public static int DEFAULT_TO_SCALE_Y = 1;
+    public static final float DEFAULT_FROM_SCALE_X = 0;
+    public static final float DEFAULT_FROM_SCALE_Y = 0;
+    public static final float DEFAULT_TO_SCALE_X = 1;
+    public static final float DEFAULT_TO_SCALE_Y = 1;
     public static final float DEFAULT_FROM_ALPHA = 0;
     public static final float DEFAULT_TO_ALPHA = 1;
     public static final int DEFAULT_DURATION = 1000;

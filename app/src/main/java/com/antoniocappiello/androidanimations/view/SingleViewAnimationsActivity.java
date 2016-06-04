@@ -17,16 +17,17 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.antoniocappiello.androidanimations.controller.AnimationProvider;
-import com.antoniocappiello.androidanimations.controller.AnimationSetBuilder;
-import com.antoniocappiello.androidanimations.controller.OnRotateChangedListener;
-import com.antoniocappiello.androidanimations.model.AnimationType;
 import com.antoniocappiello.androidanimations.Config;
-import com.antoniocappiello.androidanimations.controller.DialogBuilderHelper;
-import com.antoniocappiello.androidanimations.model.InterpolatorType;
-import com.antoniocappiello.androidanimations.controller.OnAlphaChangedListener;
 import com.antoniocappiello.androidanimations.R;
 import com.antoniocappiello.androidanimations.Utils;
+import com.antoniocappiello.androidanimations.controller.AnimationProvider;
+import com.antoniocappiello.androidanimations.controller.AnimationSetBuilder;
+import com.antoniocappiello.androidanimations.controller.DialogBuilderHelper;
+import com.antoniocappiello.androidanimations.controller.OnAlphaChangedListener;
+import com.antoniocappiello.androidanimations.controller.OnRotateChangedListener;
+import com.antoniocappiello.androidanimations.controller.OnScaleChangedListener;
+import com.antoniocappiello.androidanimations.model.AnimationType;
+import com.antoniocappiello.androidanimations.model.InterpolatorType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SingleViewAnimationsActivity extends AppCompatActivity
-        implements OnAlphaChangedListener, AnimationProvider, OnRotateChangedListener {
+        implements OnAlphaChangedListener, AnimationProvider, OnRotateChangedListener, OnScaleChangedListener {
 
     private int mDuration;
     private int mStartOffset;
@@ -87,10 +88,10 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
     private int mToDegree;
     private int mRotatePivotX;
     private int mRotatePivotY;
-    private int mFromScaleX;
-    private int mToScaleX;
-    private int mFromScaleY;
-    private int mToScaleY;
+    private float mFromScaleX;
+    private float mToScaleX;
+    private float mFromScaleY;
+    private float mToScaleY;
     private int mScalePivotX;
     private int mScalePivotY;
 
@@ -271,6 +272,27 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
                 .show();
     }
 
+    @OnClick(R.id.iv_scale_config)
+    public void showScaleConfigDialog(){
+        if (mScalePivotX == Config.DEFAULT_SCALE_PIVOT_X) {
+            mScalePivotX = tvToAnimate.getWidth() / 2;
+        }
+        if (mScalePivotY == Config.DEFAULT_SCALE_PIVOT_Y) {
+            mScalePivotY = tvToAnimate.getHeight() / 2;
+        }
+        DialogBuilderHelper.createScaleAnimationDialog(
+               SingleViewAnimationsActivity.this,
+                this,
+                mFromScaleX,
+                mToScaleX,
+                mFromScaleY,
+                mToScaleY,
+                mScalePivotX,
+                mScalePivotY,
+                tvToAnimate)
+                .show();
+    }
+
     @Override
     public void setFromAlpha(float fromAlpha) {
         mFromAlpha = fromAlpha;
@@ -324,5 +346,15 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
         mToDegree = toDegree;
         mRotatePivotX = pivotX;
         mRotatePivotY = pivotY;
+    }
+
+    @Override
+    public void setScaleConfig(float fromScaleX, float toScaleX, float fromScaleY, float toScaleY, int scalePivotX, int scalePivotY) {
+        mFromScaleX = fromScaleX;
+        mToScaleX = toScaleX;
+        mFromScaleY = fromScaleY;
+        mToScaleY = toScaleY;
+        mScalePivotX = scalePivotX;
+        mScalePivotY = scalePivotY;
     }
 }
