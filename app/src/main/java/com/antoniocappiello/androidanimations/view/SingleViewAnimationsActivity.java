@@ -36,8 +36,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SingleViewAnimationsActivity extends AppCompatActivity
-        implements OnAlphaChangedListener, AnimationProvider, OnRotateChangedListener, OnScaleChangedListener {
+public class SingleViewAnimationsActivity extends AppCompatActivity implements OnAlphaChangedListener,
+        AnimationProvider, OnRotateChangedListener, OnScaleChangedListener, OnTranslateChangedListener {
 
     private int mDuration;
     private int mStartOffset;
@@ -94,6 +94,10 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
     private float mToScaleY;
     private int mScalePivotX;
     private int mScalePivotY;
+    private int mFromTranslateX;
+    private int mToTranslateX;
+    private int mFromTranslateY;
+    private int mToTranslateY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,6 +222,11 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
         mToScaleY = Config.DEFAULT_TO_SCALE_Y;
         mScalePivotX = Config.DEFAULT_SCALE_PIVOT_X;
         mScalePivotY = Config.DEFAULT_SCALE_PIVOT_Y;
+
+        mFromTranslateX = Config.DEFAULT_TRANSLATE;
+        mToTranslateX = Config.DEFAULT_TRANSLATE;
+        mFromTranslateY = Config.DEFAULT_TRANSLATE;
+        mToTranslateY = Config.DEFAULT_TRANSLATE;
     }
 
     @OnClick(R.id.button_play)
@@ -273,7 +282,7 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
     }
 
     @OnClick(R.id.iv_scale_config)
-    public void showScaleConfigDialog(){
+    public void showScaleConfigDialog() {
         if (mScalePivotX == Config.DEFAULT_SCALE_PIVOT_X) {
             mScalePivotX = tvToAnimate.getWidth() / 2;
         }
@@ -281,7 +290,7 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
             mScalePivotY = tvToAnimate.getHeight() / 2;
         }
         DialogBuilderHelper.createScaleAnimationDialog(
-               SingleViewAnimationsActivity.this,
+                SingleViewAnimationsActivity.this,
                 this,
                 mFromScaleX,
                 mToScaleX,
@@ -289,6 +298,23 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
                 mToScaleY,
                 mScalePivotX,
                 mScalePivotY,
+                tvToAnimate)
+                .show();
+    }
+
+    @OnClick(R.id.iv_translate_config)
+    public void showTranslateConfigDialog() {
+        if (mFromTranslateX == Config.DEFAULT_TRANSLATE) {
+            mFromTranslateX = (((ViewGroup) tvToAnimate.getParent()).getWidth() + tvToAnimate.getWidth()) / 2;
+            mToTranslateX = mFromTranslateY = mToTranslateY = 0;
+        }
+        DialogBuilderHelper.createTranslateAnimationDialog(
+                SingleViewAnimationsActivity.this,
+                this,
+                mFromTranslateX,
+                mToTranslateX,
+                mFromTranslateY,
+                mToTranslateY,
                 tvToAnimate)
                 .show();
     }
@@ -327,14 +353,19 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
                         Animation.ABSOLUTE,
                         mScalePivotY);
             case TRANSLATE:
+                if (mFromTranslateX == Config.DEFAULT_TRANSLATE) {
+                    mFromTranslateX = (((ViewGroup) tvToAnimate.getParent()).getWidth() + tvToAnimate.getWidth()) / 2;
+                    mToTranslateX = mFromTranslateY = mToTranslateY = 0;
+                }
                 return new TranslateAnimation(
-                        Animation.RELATIVE_TO_SELF,
-                        0,
-                        Animation.RELATIVE_TO_SELF,
-                        0,
                         Animation.ABSOLUTE,
-                        ((ViewGroup) tvToAnimate.getParent()).getLayoutParams().height,
-                        Animation.ABSOLUTE, tvToAnimate.getLayoutParams().height);
+                        mFromTranslateX,
+                        Animation.ABSOLUTE,
+                        mToTranslateX,
+                        Animation.ABSOLUTE,
+                        mFromTranslateY,
+                        Animation.ABSOLUTE,
+                        mToTranslateY);
             default:
                 return null;
         }
@@ -356,5 +387,13 @@ public class SingleViewAnimationsActivity extends AppCompatActivity
         mToScaleY = toScaleY;
         mScalePivotX = scalePivotX;
         mScalePivotY = scalePivotY;
+    }
+
+    @Override
+    public void setTranslateConfig(int fromTranslateX, int toTranslateX, int fromTranslateY, int toTranslateY) {
+        mFromTranslateX = fromTranslateX;
+        mToTranslateX = toTranslateX;
+        mFromTranslateY = fromTranslateY;
+        mToTranslateY = toTranslateY;
     }
 }

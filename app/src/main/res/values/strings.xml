@@ -14,8 +14,10 @@
     <string name="pivot_x_brackets">Pivot X (%s):</string>
     <string name="pivot_y_brackets">Pivot Y (%s):</string>
     <string name="configure_rotate_animation">Configure rotate animation</string>
-    <string name="from_scale_x_brackets">From scale X (%s):</string>
-    <string name="to_scale_x_brackets">To scale X (%s):</string>
-    <string name="from_scale_y_brackets">From scale Y (%s):</string>
-    <string name="to_scale_y_brackets">To scale Y (%s):</string>
+    <string name="configure_scale_animation">Configure scale animation</string>
+    <string name="configure_translate_animation">Configure translate animation</string>
+    <string name="from_x_brackets">From X (%s):</string>
+    <string name="to_x_brackets">To X (%s):</string>
+    <string name="from_y_brackets">From Y (%s):</string>
+    <string name="to_y_brackets">To Y (%s)</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.antoniocappiello.androidanimations;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
@@ -42,7 +43,7 @@ public class Utils {
         return new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tvToUpdate.setText(activity.getString(stringResId, String.valueOf(maxProgress > 0 ? covertProgressToFloat(progress, maxProgress) : progress)));
+                tvToUpdate.setText(activity.getString(stringResId, String.valueOf(maxProgress > 0 ? convertProgressToFloat(progress, maxProgress) : progress)));
             }
 
             @Override
@@ -57,15 +58,43 @@ public class Utils {
         };
     }
 
-    public static int covertProgressToInt(float fromAlpha, int maxProgress) {
+    public static int convertProgressToInt(float fromAlpha, int maxProgress) {
         return (int) (fromAlpha * maxProgress);
     }
 
-    public static float covertProgressToFloat(int progress, int maxProgress) {
+    public static float convertProgressToFloat(int progress, int maxProgress) {
         if (progress == 0) {
             return 0;
         } else {
             return (float) progress / maxProgress;
         }
+    }
+
+    public static SeekBar.OnSeekBarChangeListener createSeekBarChangeListenerWithRange(final Activity activity, final TextView tvToUpdate, final int stringResId, final int maxRangeValue) {
+        return new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.i("Utils", "progress: " + progress);
+                tvToUpdate.setText(activity.getString(stringResId, String.valueOf(convertProgressToRangeValue(progress, maxRangeValue))));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        };
+    }
+
+    public static int convertRangeValueToProgress(int rangeValue, int maxRangeValue) {
+        return rangeValue + maxRangeValue;
+    }
+
+    public static int convertProgressToRangeValue(int progress, int maxRangeValue) {
+        return progress - maxRangeValue;
     }
 }
