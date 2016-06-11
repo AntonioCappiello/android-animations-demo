@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SingleViewAnimationsActivity.class));
             }
         });
+
+        goToSingleViewAnimations(null);
     }
 
     public void goToSingleViewAnimations(View view) {
